@@ -95,9 +95,14 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
       ),
       itemBuilder: (context, index) {
         return HeroImage(
-          onTap: () {
-            //TODO open details page
-          },
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ImageDetailsPage(
+                image: images[index],
+              ),
+            ),
+          ),
           image: images[index],
         );
       },
