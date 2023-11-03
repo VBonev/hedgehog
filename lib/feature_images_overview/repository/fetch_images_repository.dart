@@ -1,5 +1,7 @@
-abstract class FetchImagesRepository {
-  Future<void> getPopularImages();
+import 'package:network/models/response/images_response.dart';
 
-  Future<void> searchImage(String query);
+abstract class FetchImagesRepository {
+  Future<ImagesResponse> getPopularImages();
+
+  Future<ImagesResponse> searchImage(String query);
 }

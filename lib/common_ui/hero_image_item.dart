@@ -4,29 +4,30 @@ import '../../assets.dart';
 
 class HeroImage extends StatelessWidget {
   const HeroImage({
-    required this.image,
+    required this.imageUrl,
     this.onTap,
     super.key,
   });
 
-  final String image;
+  final String? imageUrl;
   final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) => Hero(
-        tag: image,
+        tag: '$imageUrl',
         child: Material(
-          color: Colors.transparent,
           child: InkWell(
             onTap: onTap,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8.0),
-              child: Image.network(
-                image,
-                fit: BoxFit.fitWidth,
-                errorBuilder: (context, error, _) =>
-                    Image.asset(imagePlaceholder),
-              ),
+            child: ColoredBox(
+              color: Colors.black26,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    imageUrl!,
+                    fit: BoxFit.fitWidth,
+                    errorBuilder: (context, error, _) =>
+                        Image.asset(imagePlaceholder),
+                  )),
             ),
           ),
         ),

@@ -5,11 +5,11 @@ import '../../strings.dart';
 
 class ImageDetailsPage extends StatelessWidget {
   const ImageDetailsPage({
-    required this.image,
+    required this.imageUrl,
     super.key,
   });
 
-  final String image;
+  final String? imageUrl;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ImageDetailsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: HeroImage(image: image),
+        child: HeroImage(imageUrl: imageUrl),
       ),
     );
   }

@@ -2,6 +2,7 @@ import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imgur/common_ui/hero_image_item.dart';
+import 'package:imgur/feature_images_overview/model/image_model.dart';
 
 import '../../feature_image_details/ui/image_details_page.dart';
 import '../../strings.dart';
@@ -30,15 +31,19 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
     return Scaffold(
       appBar: _buildSearchBar(),
       body: ColoredBox(
-        color: Colors.white60,
+        color: Colors.white10,
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: BlocBuilder<FetchImagesCubit, FetchImagesState>(
-              builder: (context, state) => state.when(
-                  initial: () => const CenterLoadingView(),
-                  loading: () => const CenterLoadingView(),
-                  loaded: (images) => _buildGridView(images),
-                  error: (error) => const SizedBox())),
+            builder: (context, state) => state.when(
+              initial: () => const CenterLoadingView(),
+              loading: () => const CenterLoadingView(),
+              loaded: (images) => _buildGridView(images),
+              error: (error) => Center(
+                child: Text(error.errorMessage ?? ''),
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -46,19 +51,20 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
 
   PreferredSizeWidget _buildSearchBar() {
     return EasySearchBar(
+      debounceDuration: const Duration(seconds: 10),
       actions: [
         Tooltip(
           message: clearHistoryTooltip,
           child: InkWell(
             onTap: () {
-              setState(
-                () => _suggestions.clear(),
-              );
               var message =
                   _suggestions.isEmpty ? noSearchLabel : clearHistoryLabel;
               ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                 content: Text(message),
               ));
+              setState(
+                () => _suggestions.clear(),
+              );
             },
             child: const Icon(Icons.manage_search),
           ),
@@ -76,36 +82,42 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
         color: Colors.white,
       ),
       onSearch: (value) {
-        setState(() => _suggestions.add(value));
-        FetchImagesCubit.of(context).searchImage(
-          query: value,
-        );
+        if (value.isNotEmpty) {
+          setState(() => _suggestions.add(value));
+          FetchImagesCubit.of(context).searchImage(
+            query: value,
+          );
+        }
       },
       suggestions: _suggestions.toList(),
     );
   }
 
-  GridView _buildGridView(List<String> images) {
-    return GridView.builder(
-      itemCount: images.length,
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        mainAxisSpacing: 4.0,
-        crossAxisSpacing: 4.0,
-      ),
-      itemBuilder: (context, index) {
-        return HeroImage(
-          onTap: () => Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ImageDetailsPage(
-                image: images[index],
-              ),
-            ),
+  Widget _buildGridView(
+    List<ImageModel> images,
+  ) =>
+      RefreshIndicator(
+        onRefresh: () async => FetchImagesCubit.of(context).getPopularImages(),
+        child: GridView.builder(
+          itemCount: images.length,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 3,
+            mainAxisSpacing: 4.0,
+            crossAxisSpacing: 4.0,
           ),
-          image: images[index],
-        );
-      },
-    );
-  }
+          itemBuilder: (context, index) {
+            return HeroImage(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ImageDetailsPage(
+                    imageUrl: images[index].link,
+                  ),
+                ),
+              ),
+              imageUrl: images[index].link,
+            );
+          },
+        ),
+      );
 }

@@ -20,24 +20,24 @@ mixin _$FetchImagesState {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> images) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(List<ImageModel> images) loaded,
+    required TResult Function(ServerError error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> images)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(List<ImageModel> images)? loaded,
+    TResult? Function(ServerError error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> images)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(List<ImageModel> images)? loaded,
+    TResult Function(ServerError error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -129,8 +129,8 @@ class _$FetchImagesStateInitialImpl implements FetchImagesStateInitial {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> images) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(List<ImageModel> images) loaded,
+    required TResult Function(ServerError error) error,
   }) {
     return initial();
   }
@@ -140,8 +140,8 @@ class _$FetchImagesStateInitialImpl implements FetchImagesStateInitial {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> images)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(List<ImageModel> images)? loaded,
+    TResult? Function(ServerError error)? error,
   }) {
     return initial?.call();
   }
@@ -151,8 +151,8 @@ class _$FetchImagesStateInitialImpl implements FetchImagesStateInitial {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> images)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(List<ImageModel> images)? loaded,
+    TResult Function(ServerError error)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -246,8 +246,8 @@ class _$FetchImagesStateLoadingImpl implements FetchImagesStateLoading {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> images) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(List<ImageModel> images) loaded,
+    required TResult Function(ServerError error) error,
   }) {
     return loading();
   }
@@ -257,8 +257,8 @@ class _$FetchImagesStateLoadingImpl implements FetchImagesStateLoading {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> images)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(List<ImageModel> images)? loaded,
+    TResult? Function(ServerError error)? error,
   }) {
     return loading?.call();
   }
@@ -268,8 +268,8 @@ class _$FetchImagesStateLoadingImpl implements FetchImagesStateLoading {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> images)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(List<ImageModel> images)? loaded,
+    TResult Function(ServerError error)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -327,7 +327,7 @@ abstract class _$$FetchImagesStateLoadedImplCopyWith<$Res> {
           $Res Function(_$FetchImagesStateLoadedImpl) then) =
       __$$FetchImagesStateLoadedImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({List<String> images});
+  $Res call({List<ImageModel> images});
 }
 
 /// @nodoc
@@ -348,7 +348,7 @@ class __$$FetchImagesStateLoadedImplCopyWithImpl<$Res>
       null == images
           ? _value._images
           : images // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as List<ImageModel>,
     ));
   }
 }
@@ -356,12 +356,12 @@ class __$$FetchImagesStateLoadedImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchImagesStateLoadedImpl implements FetchImagesStateLoaded {
-  const _$FetchImagesStateLoadedImpl(final List<String> images)
+  const _$FetchImagesStateLoadedImpl(final List<ImageModel> images)
       : _images = images;
 
-  final List<String> _images;
+  final List<ImageModel> _images;
   @override
-  List<String> get images {
+  List<ImageModel> get images {
     if (_images is EqualUnmodifiableListView) return _images;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_images);
@@ -396,8 +396,8 @@ class _$FetchImagesStateLoadedImpl implements FetchImagesStateLoaded {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> images) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(List<ImageModel> images) loaded,
+    required TResult Function(ServerError error) error,
   }) {
     return loaded(images);
   }
@@ -407,8 +407,8 @@ class _$FetchImagesStateLoadedImpl implements FetchImagesStateLoaded {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> images)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(List<ImageModel> images)? loaded,
+    TResult? Function(ServerError error)? error,
   }) {
     return loaded?.call(images);
   }
@@ -418,8 +418,8 @@ class _$FetchImagesStateLoadedImpl implements FetchImagesStateLoaded {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> images)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(List<ImageModel> images)? loaded,
+    TResult Function(ServerError error)? error,
     required TResult orElse(),
   }) {
     if (loaded != null) {
@@ -467,10 +467,10 @@ class _$FetchImagesStateLoadedImpl implements FetchImagesStateLoaded {
 }
 
 abstract class FetchImagesStateLoaded implements FetchImagesState {
-  const factory FetchImagesStateLoaded(final List<String> images) =
+  const factory FetchImagesStateLoaded(final List<ImageModel> images) =
       _$FetchImagesStateLoadedImpl;
 
-  List<String> get images;
+  List<ImageModel> get images;
   @JsonKey(ignore: true)
   _$$FetchImagesStateLoadedImplCopyWith<_$FetchImagesStateLoadedImpl>
       get copyWith => throw _privateConstructorUsedError;
@@ -483,7 +483,7 @@ abstract class _$$FetchImagesStateErrorImplCopyWith<$Res> {
           $Res Function(_$FetchImagesStateErrorImpl) then) =
       __$$FetchImagesStateErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({String? error});
+  $Res call({ServerError error});
 }
 
 /// @nodoc
@@ -497,13 +497,13 @@ class __$$FetchImagesStateErrorImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? error = freezed,
+    Object? error = null,
   }) {
     return _then(_$FetchImagesStateErrorImpl(
-      error: freezed == error
+      error: null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as ServerError,
     ));
   }
 }
@@ -511,10 +511,10 @@ class __$$FetchImagesStateErrorImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$FetchImagesStateErrorImpl implements FetchImagesStateError {
-  const _$FetchImagesStateErrorImpl({this.error});
+  const _$FetchImagesStateErrorImpl({required this.error});
 
   @override
-  final String? error;
+  final ServerError error;
 
   @override
   String toString() {
@@ -544,8 +544,8 @@ class _$FetchImagesStateErrorImpl implements FetchImagesStateError {
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
     required TResult Function() loading,
-    required TResult Function(List<String> images) loaded,
-    required TResult Function(String? error) error,
+    required TResult Function(List<ImageModel> images) loaded,
+    required TResult Function(ServerError error) error,
   }) {
     return error(this.error);
   }
@@ -555,8 +555,8 @@ class _$FetchImagesStateErrorImpl implements FetchImagesStateError {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
     TResult? Function()? loading,
-    TResult? Function(List<String> images)? loaded,
-    TResult? Function(String? error)? error,
+    TResult? Function(List<ImageModel> images)? loaded,
+    TResult? Function(ServerError error)? error,
   }) {
     return error?.call(this.error);
   }
@@ -566,8 +566,8 @@ class _$FetchImagesStateErrorImpl implements FetchImagesStateError {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
     TResult Function()? loading,
-    TResult Function(List<String> images)? loaded,
-    TResult Function(String? error)? error,
+    TResult Function(List<ImageModel> images)? loaded,
+    TResult Function(ServerError error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -615,10 +615,10 @@ class _$FetchImagesStateErrorImpl implements FetchImagesStateError {
 }
 
 abstract class FetchImagesStateError implements FetchImagesState {
-  const factory FetchImagesStateError({final String? error}) =
+  const factory FetchImagesStateError({required final ServerError error}) =
       _$FetchImagesStateErrorImpl;
 
-  String? get error;
+  ServerError get error;
   @JsonKey(ignore: true)
   _$$FetchImagesStateErrorImplCopyWith<_$FetchImagesStateErrorImpl>
       get copyWith => throw _privateConstructorUsedError;
