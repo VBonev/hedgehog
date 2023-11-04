@@ -5,14 +5,15 @@ import 'package:network/models/base/server_errors.dart';
 import '../../infra/use_cases/add_favorites_use_case.dart';
 import '../../infra/use_cases/get_images_use_case.dart';
 import '../../infra/use_cases/search_image_use_case.dart';
-import 'fetch_images_state.dart';
+
+part 'fetch_images_state.dart';
 
 class FetchImagesCubit extends Cubit<FetchImagesState> {
   FetchImagesCubit({
     required this.getImageUseCase,
     required this.searchImageUseCase,
     required this.addFavoritesUseCase,
-  }) : super(const FetchImagesState.initial());
+  }) : super(const FetchImagesStateInitial());
 
   final GetImagesUseCase getImageUseCase;
   final SearchImageUseCase searchImageUseCase;
@@ -31,19 +32,15 @@ class FetchImagesCubit extends Cubit<FetchImagesState> {
   void addFavorites({
     required List<ImageModel> images,
   }) =>
-      emit(
-        FetchImagesState.loaded(
-          images,
-        ),
-      );
+      emit(FetchImagesStateLoaded(addFavoritesUseCase(images)));
 
   Future<void> _loadData(Future loadData) async {
     try {
-      emit(const FetchImagesState.loading());
+      emit(const FetchImagesStateLoading());
       final data = await loadData;
-      emit(FetchImagesState.loaded(data));
+      emit(FetchImagesStateLoaded(data));
     } catch (error) {
-      emit(FetchImagesState.error(error: ServerError.withError(error)));
+      emit(FetchImagesStateError(error: ServerError.withError(error)));
     }
   }
 

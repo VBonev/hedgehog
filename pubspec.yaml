@@ -15,6 +15,7 @@ dependencies:
   freezed: ^2.4.5
   loading_animation_widget: ^1.2.0+4
   shared_preferences: ^2.2.2
+  equatable: ^2.0.5
   network:
     path: network
 

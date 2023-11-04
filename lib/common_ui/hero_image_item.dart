@@ -13,20 +13,23 @@ class HeroImage extends StatelessWidget {
   final VoidCallback? onTap;
 
   @override
-  Widget build(BuildContext context) => Hero(
-        tag: '$imageUrl',
-        child: Material(
-          child: InkWell(
-            onTap: onTap,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(
-                  imageUrl!,
-                  fit: BoxFit.fitWidth,
-                  errorBuilder: (context, error, _) =>
-                      Image.asset(placeholderImg),
-                )),
+  Widget build(BuildContext context) => Card(
+    elevation: 50,
+    child: Hero(
+          tag: '$imageUrl',
+          child: Material(
+            child: InkWell(
+              onTap: onTap,
+              child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(
+                    imageUrl!,
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, _) =>
+                        Image.asset(placeholderImg),
+                  )),
+            ),
           ),
         ),
-      );
+  );
 }

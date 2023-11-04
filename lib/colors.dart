@@ -7,5 +7,5 @@ abstract class AppColors {
   static const Color white = Colors.white;
   static const Color gold =Color(0xFFECC129);
   static const Color pink = Color(0xA9B945E3);
-  static const Color red = Color(0xBAF14646);
+  static const Color red = Color(0xFFF14646);
 }

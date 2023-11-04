@@ -8,7 +8,6 @@ import '../../assets.dart';
 import '../../colors.dart';
 import '../../strings.dart';
 import '../bloc/fetch_images_cubit.dart';
-import '../bloc/fetch_images_state.dart';
 import 'center_loading_view.dart';
 
 class ImagesOverviewPage extends StatefulWidget {
@@ -34,19 +33,21 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
       body: Padding(
         padding: const EdgeInsets.all(4.0),
         child: BlocBuilder<FetchImagesCubit, FetchImagesState>(
-          builder: (context, state) => state.when(
-            initial: () => const CenterLoadingView(),
-            loading: () => const CenterLoadingView(),
-            loaded: (images) => ImageGridView(
-              images: images,
-              refresh: _refresh,
-              addFavorites: (List<ImageModel> images) =>
-                  FetchImagesCubit.of(context).addFavorites(images: images),
-            ),
-            error: (error) => Center(
-              child: Text(error.errorMessage ?? ''),
-            ),
-          ),
+          builder: (context, state) {
+            if (state is FetchImagesStateLoaded) {
+              return ImageGridView(
+                images: state.images,
+                refresh: _refresh,
+                addFavorites: (List<ImageModel> images) =>
+                    FetchImagesCubit.of(context).addFavorites(images: images),
+              );
+            } else if (state is FetchImagesStateError) {
+              return Center(
+                child: Text(state.error.errorMessage ?? ''),
+              );
+            }
+            return const CenterLoadingView();
+          },
         ),
       ),
     );

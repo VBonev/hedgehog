@@ -32,29 +32,31 @@ class ImageGridView extends StatelessWidget {
             var image = images[index];
             return Stack(
               children: [
-                HeroImage(
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => PageFactory.getImageDetails(
-                        image: image,
+                SizedBox(
+                  width: double.maxFinite,
+                  height: double.maxFinite,
+                  child: HeroImage(
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PageFactory.getImageDetails(
+                          image: image,
+                        ),
                       ),
+                    ).then(
+                      (value) => addFavorites(images),
                     ),
-                  ).then(
-                    (value) => addFavorites(images),
+                    imageUrl: image.link,
                   ),
-                  imageUrl: image.link,
                 ),
                 if (image.isFavorite == true)
-                  Positioned(
+                  const Positioned(
                     bottom: 10,
                     left: 10,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15.0),
-                        color: AppColors.red,
-                      ),
-                      child: const FavoriteButton(
+                    child: Card(
+                      elevation: 10,
+                      color: AppColors.red,
+                      child: FavoriteButton(
                         isSelected: true,
                         size: 34,
                       ),
