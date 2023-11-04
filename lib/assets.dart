@@ -1,6 +1,7 @@
 // images
 
-const imagePlaceholder = 'assets/image_placeholder.png';
+const placeholderImg = 'assets/image_placeholder.png';
+const clearHistoryImg = 'assets/clear_history.png';
 
 //mocks
 

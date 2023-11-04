@@ -1,10 +1,10 @@
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:imgur/common_ui/hero_image_item.dart';
 import 'package:imgur/feature_images_overview/model/image_model.dart';
-import 'package:imgur/infra/page_factory.dart';
+import 'package:imgur/feature_images_overview/ui/images_grid_view.dart';
 
+import '../../assets.dart';
 import '../../colors.dart';
 import '../../strings.dart';
 import '../bloc/fetch_images_cubit.dart';
@@ -24,7 +24,7 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
   @override
   void initState() {
     super.initState();
-    FetchImagesCubit.of(context).getPopularImages();
+    _refresh();
   }
 
   @override
@@ -37,7 +37,12 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
           builder: (context, state) => state.when(
             initial: () => const CenterLoadingView(),
             loading: () => const CenterLoadingView(),
-            loaded: (images) => _buildGridView(images),
+            loaded: (images) => ImageGridView(
+              images: images,
+              refresh: _refresh,
+              addFavorites: (List<ImageModel> images) =>
+                  FetchImagesCubit.of(context).addFavorites(images: images),
+            ),
             error: (error) => Center(
               child: Text(error.errorMessage ?? ''),
             ),
@@ -64,7 +69,12 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
                 () => _suggestions.clear(),
               );
             },
-            child: const Icon(Icons.manage_search),
+            child: Image.asset(
+              clearHistoryImg,
+              color: Colors.white,
+              width: 20,
+              height: 20,
+            ),
           ),
         )
       ],
@@ -91,31 +101,5 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
     );
   }
 
-  Widget _buildGridView(
-    List<ImageModel> images,
-  ) =>
-      RefreshIndicator(
-        onRefresh: () async => FetchImagesCubit.of(context).getPopularImages(),
-        child: GridView.builder(
-          itemCount: images.length,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            mainAxisSpacing: 4.0,
-            crossAxisSpacing: 4.0,
-          ),
-          itemBuilder: (context, index) {
-            return HeroImage(
-              onTap: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PageFactory.getImageDetails(
-                    image: images[index],
-                  ),
-                ),
-              ),
-              imageUrl: images[index].link,
-            );
-          },
-        ),
-      );
+  void _refresh() => FetchImagesCubit.of(context).getPopularImages();
 }

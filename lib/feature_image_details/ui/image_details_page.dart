@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:imgur/feature_image_details/ui/favorite_button.dart';
 import 'package:imgur/feature_images_overview/model/image_model.dart';
+import 'package:imgur/infra/storage/shared_preferences_manager.dart';
 
 import '../../colors.dart';
 import '../../common_ui/hero_image_item.dart';
@@ -20,10 +21,9 @@ class ImageDetailsPage extends StatefulWidget {
 }
 
 class _ImageDetailsPageState extends State<ImageDetailsPage> {
-  bool isFavorite = false;
-
   @override
   Widget build(BuildContext context) {
+    var isFavorite = widget.image?.isFavorite == true;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
@@ -60,7 +60,9 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
               _buildButtonsBar(icons: [
                 FavoriteButton(
                   onTap: () {
-                    setState(() => isFavorite = !isFavorite);
+                    SharedPreferencesManager.of(context).changeFavorites(
+                        id: widget.image?.id, isFavorite: !isFavorite);
+                    setState(() => widget.image?.isFavorite = !isFavorite);
                     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                       content: Text(favoriteToast(isFavorite)),
                       duration: const Duration(milliseconds: 500),
@@ -79,7 +81,6 @@ class _ImageDetailsPageState extends State<ImageDetailsPage> {
                   label: scoreLabel,
                 ),
               ], alignment: MainAxisAlignment.spaceBetween),
-
             ],
           ),
         ),

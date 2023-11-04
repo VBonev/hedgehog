@@ -24,7 +24,7 @@ class HeroImage extends StatelessWidget {
                   imageUrl!,
                   fit: BoxFit.fitWidth,
                   errorBuilder: (context, error, _) =>
-                      Image.asset(imagePlaceholder),
+                      Image.asset(placeholderImg),
                 )),
           ),
         ),

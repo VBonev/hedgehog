@@ -4,7 +4,7 @@ class ImageModel {
     this.link,
     this.title,
     this.views,
-    this.favorite,
+    this.isFavorite,
     this.ups,
     this.downs,
     this.points,
@@ -15,7 +15,7 @@ class ImageModel {
   final String? link;
   final String? title;
   final int? views;
-  final bool? favorite;
+  bool? isFavorite;
   final int? ups;
   final int? downs;
   final int? points;
