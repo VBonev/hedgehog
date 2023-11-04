@@ -1,7 +1,7 @@
-import 'package:imgur/mapper/image_mapper.dart';
+import '../../feature_images_overview/model/image_model.dart';
+import '../../feature_images_overview/repository/fetch_images_repository.dart';
 
-import '../feature_images_overview/model/image_model.dart';
-import '../feature_images_overview/repository/fetch_images_repository.dart';
+import '../mapper/image_mapper.dart';
 
 class SearchImageUseCase {
   const SearchImageUseCase(this.repository);

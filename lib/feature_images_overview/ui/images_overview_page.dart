@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:imgur/common_ui/hero_image_item.dart';
 import 'package:imgur/feature_images_overview/model/image_model.dart';
+import 'package:imgur/infra/page_factory.dart';
 
-import '../../feature_image_details/ui/image_details_page.dart';
 import '../../strings.dart';
 import '../bloc/fetch_images_cubit.dart';
 import '../bloc/fetch_images_state.dart';
@@ -110,7 +110,7 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ImageDetailsPage(
+                  builder: (context) => PageFactory.getImageDetails(
                     imageUrl: images[index].link,
                   ),
                 ),

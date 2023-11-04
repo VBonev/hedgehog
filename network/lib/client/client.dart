@@ -12,9 +12,9 @@ class NetworkClient {
   final Dio _client = Dio(
     BaseOptions(
       contentType: 'application/json',
-      receiveTimeout: Duration(microseconds: 5000),
+      receiveTimeout: Duration(seconds: 10),
       headers: {
-        'Authorization': 'Bearer 84a12992c0d4e6ee333efab22a533e054ac49a3a'
+        'Authorization': 'Bearer f881090f66939ec075c864122e08b930eb35825f'
       },
     ),
   )..interceptors.add(LoggingInterceptor());

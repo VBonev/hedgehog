@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:network/models/base/server_errors.dart';
-import '../../use_cases/get_images_use_case.dart';
-import '../../use_cases/search_image_use_case.dart';
+import '../../infra/use_cases/get_images_use_case.dart';
+import '../../infra/use_cases/search_image_use_case.dart';
 import 'fetch_images_state.dart';
 
 class FetchImagesCubit extends Cubit<FetchImagesState> {

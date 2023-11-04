@@ -1,7 +1,7 @@
 import 'package:network/models/common/image_dto.dart';
 import 'package:network/models/response/images_response.dart';
-import '../extensions/list_extensions.dart';
-import '../feature_images_overview/model/image_model.dart';
+import '../../extensions/list_extensions.dart';
+import '../../feature_images_overview/model/image_model.dart';
 
 abstract class ImageMapper {
   static const _imageType = 'jpeg';
