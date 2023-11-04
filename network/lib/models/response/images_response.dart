@@ -13,5 +13,5 @@ class ImagesResponse {
   factory ImagesResponse.fromJson(Map<String, dynamic> json) =>
       _$ImagesResponseFromJson(json);
 
-  final List<Album>? data;
+  final List<AlbumDTO>? data;
 }

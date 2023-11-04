@@ -18,17 +18,14 @@ class HeroImage extends StatelessWidget {
         child: Material(
           child: InkWell(
             onTap: onTap,
-            child: ColoredBox(
-              color: Colors.black26,
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(
-                    imageUrl!,
-                    fit: BoxFit.fitWidth,
-                    errorBuilder: (context, error, _) =>
-                        Image.asset(imagePlaceholder),
-                  )),
-            ),
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(
+                  imageUrl!,
+                  fit: BoxFit.fitWidth,
+                  errorBuilder: (context, error, _) =>
+                      Image.asset(imagePlaceholder),
+                )),
           ),
         ),
       );

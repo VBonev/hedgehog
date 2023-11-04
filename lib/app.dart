@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'colors.dart';
 import 'infra/page_factory.dart';
 import 'strings.dart';
 
@@ -17,7 +18,10 @@ class ImgurApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: appTitle,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor:  AppColors.primary,
+          background: AppColors.background,
+        ),
         useMaterial3: true,
       ),
       home: PageFactory.getImagesOverview(),

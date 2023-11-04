@@ -5,6 +5,7 @@ import 'package:imgur/common_ui/hero_image_item.dart';
 import 'package:imgur/feature_images_overview/model/image_model.dart';
 import 'package:imgur/infra/page_factory.dart';
 
+import '../../colors.dart';
 import '../../strings.dart';
 import '../bloc/fetch_images_cubit.dart';
 import '../bloc/fetch_images_state.dart';
@@ -30,18 +31,15 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildSearchBar(),
-      body: ColoredBox(
-        color: Colors.white10,
-        child: Padding(
-          padding: const EdgeInsets.all(4.0),
-          child: BlocBuilder<FetchImagesCubit, FetchImagesState>(
-            builder: (context, state) => state.when(
-              initial: () => const CenterLoadingView(),
-              loading: () => const CenterLoadingView(),
-              loaded: (images) => _buildGridView(images),
-              error: (error) => Center(
-                child: Text(error.errorMessage ?? ''),
-              ),
+      body: Padding(
+        padding: const EdgeInsets.all(4.0),
+        child: BlocBuilder<FetchImagesCubit, FetchImagesState>(
+          builder: (context, state) => state.when(
+            initial: () => const CenterLoadingView(),
+            loading: () => const CenterLoadingView(),
+            loaded: (images) => _buildGridView(images),
+            error: (error) => Center(
+              child: Text(error.errorMessage ?? ''),
             ),
           ),
         ),
@@ -74,12 +72,12 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
         appTitle,
       ),
       titleTextStyle: const TextStyle(
-        color: Colors.white,
+        color: AppColors.white,
         fontSize: 20,
       ),
       iconTheme: const IconThemeData(
         size: 24,
-        color: Colors.white,
+        color: AppColors.white,
       ),
       onSearch: (value) {
         if (value.isNotEmpty) {
@@ -111,7 +109,7 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
                 context,
                 MaterialPageRoute(
                   builder: (context) => PageFactory.getImageDetails(
-                    imageUrl: images[index].link,
+                    image: images[index],
                   ),
                 ),
               ),

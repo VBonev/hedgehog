@@ -1,15 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:imgur/feature_image_details/ui/favorite_button.dart';
+import 'package:imgur/feature_images_overview/model/image_model.dart';
 
+import '../../colors.dart';
 import '../../common_ui/hero_image_item.dart';
 import '../../strings.dart';
+import 'icon_button.dart';
 
-class ImageDetailsPage extends StatelessWidget {
+class ImageDetailsPage extends StatefulWidget {
   const ImageDetailsPage({
-    required this.imageUrl,
+    required this.image,
     super.key,
   });
 
-  final String? imageUrl;
+  final ImageModel? image;
+
+  @override
+  State<ImageDetailsPage> createState() => _ImageDetailsPageState();
+}
+
+class _ImageDetailsPageState extends State<ImageDetailsPage> {
+  bool isFavorite = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +30,79 @@ class ImageDetailsPage extends StatelessWidget {
         title: const Text(detailsTitle),
         iconTheme: const IconThemeData(
           size: 24,
-          color: Colors.white,
+          color: AppColors.white,
         ),
         titleTextStyle: const TextStyle(
-          color: Colors.white,
+          color: AppColors.white,
           fontSize: 20,
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: HeroImage(imageUrl: imageUrl),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Text(
+                  widget.image?.title ?? '',
+                  style: const TextStyle(
+                    color: AppColors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: HeroImage(imageUrl: widget.image?.link),
+              ),
+              _buildButtonsBar(icons: [
+                FavoriteButton(
+                  onTap: () {
+                    setState(() => isFavorite = !isFavorite);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text(favoriteToast(isFavorite)),
+                      duration: const Duration(milliseconds: 500),
+                    ));
+                  },
+                  isSelected: isFavorite,
+                ),
+                IconLabelView(
+                  icon: Icons.remove_red_eye_rounded,
+                  value: widget.image?.views,
+                  label: viewsLabel,
+                ),
+                IconLabelView(
+                  icon: Icons.bolt_rounded,
+                  value: widget.image?.score,
+                  label: scoreLabel,
+                ),
+              ], alignment: MainAxisAlignment.spaceBetween),
+
+            ],
+          ),
+        ),
       ),
     );
   }
+
+  Widget _buildButtonsBar({
+    required List<Widget> icons,
+    MainAxisAlignment? alignment,
+  }) =>
+      Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(8)),
+          color: AppColors.primary,
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: alignment ?? MainAxisAlignment.start,
+            children: icons,
+          ),
+        ),
+      );
 }

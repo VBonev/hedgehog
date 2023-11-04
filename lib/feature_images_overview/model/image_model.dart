@@ -16,7 +16,6 @@ class ImageModel {
   final String? title;
   final int? views;
   final bool? favorite;
-
   final int? ups;
   final int? downs;
   final int? points;

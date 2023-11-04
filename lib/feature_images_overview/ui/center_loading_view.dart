@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
+import '../../colors.dart';
+
 class CenterLoadingView extends StatelessWidget {
   const CenterLoadingView({
-    this.mainColor = Colors.deepPurple,
-    this.secondaryColor = Colors.pinkAccent,
+    this.mainColor = AppColors.red,
+    this.secondaryColor = AppColors.pink,
     this.size = 70,
     super.key,
   });

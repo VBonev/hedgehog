@@ -1,3 +1,4 @@
+import 'package:network/models/common/album_dto.dart';
 import 'package:network/models/common/image_dto.dart';
 import 'package:network/models/response/images_response.dart';
 import '../../extensions/list_extensions.dart';
@@ -10,7 +11,8 @@ abstract class ImageMapper {
     final list = response.data?.map(
           (element) {
             return _mapSingleImage(
-              element.images?.firstWhereOrNull(
+              album: element,
+              model: element.images?.firstWhereOrNull(
                 (element) {
                   return element.type?.contains(_imageType) == true;
                 },
@@ -23,15 +25,19 @@ abstract class ImageMapper {
     return list;
   }
 
-  static ImageModel _mapSingleImage(ImageDTO? model) => ImageModel(
+  static ImageModel _mapSingleImage({
+    AlbumDTO? album,
+    ImageDTO? model,
+  }) =>
+      ImageModel(
         id: model?.id,
         link: model?.link,
-        title: model?.title,
-        views: model?.views,
+        title: model?.title ?? album?.title,
+        views: model?.views ?? album?.views,
         favorite: model?.favorite,
-        ups: model?.ups,
-        downs: model?.downs,
-        points: model?.points,
-        score: model?.score,
+        ups: model?.ups ?? album?.ups,
+        downs: model?.downs ?? album?.downs,
+        points: model?.points ?? album?.points,
+        score: model?.score ?? album?.score,
       );
 }
