@@ -86,6 +86,8 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
         color: AppColors.white,
         fontSize: 20,
       ),
+      searchBackgroundColor: AppColors.white,
+      suggestionBackgroundColor: AppColors.white,
       iconTheme: const IconThemeData(
         size: 24,
         color: AppColors.white,
