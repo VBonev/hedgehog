@@ -4,7 +4,7 @@ import '../../colors.dart';
 import '../../common_ui/hero_image_item.dart';
 import '../../feature_image_details/ui/favorite_button.dart';
 import '../../infra/page_factory.dart';
-import '../model/image_model.dart';
+import '../../common_models/image_model.dart';
 
 class ImageGridView extends StatelessWidget {
   const ImageGridView({
@@ -30,39 +30,41 @@ class ImageGridView extends StatelessWidget {
           ),
           itemBuilder: (context, index) {
             var image = images[index];
-            return Stack(
-              children: [
-                SizedBox(
-                  width: double.maxFinite,
-                  height: double.maxFinite,
-                  child: HeroImage(
-                    onTap: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PageFactory.getImageDetails(
-                          image: image,
-                        ),
-                      ),
-                    ).then(
-                      (value) => addFavorites(images),
-                    ),
-                    imageUrl: image.link,
+            return InkWell(
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PageFactory.getImageDetails(
+                    image: image,
                   ),
                 ),
-                if (image.isFavorite == true)
-                  const Positioned(
-                    bottom: 10,
-                    left: 10,
-                    child: Card(
-                      elevation: 10,
-                      color: AppColors.red,
-                      child: FavoriteButton(
-                        isSelected: true,
-                        size: 34,
-                      ),
+              ).then(
+                (value) => addFavorites(images),
+              ),
+              child: Stack(
+                children: [
+                  SizedBox(
+                    width: double.maxFinite,
+                    height: double.maxFinite,
+                    child: HeroImage(
+                      imageUrl: image.link,
                     ),
                   ),
-              ],
+                  if (image.isFavorite == true)
+                    const Positioned(
+                      bottom: 10,
+                      left: 10,
+                      child: Card(
+                        elevation: 10,
+                        color: AppColors.red,
+                        child: FavoriteButton(
+                          isSelected: true,
+                          size: 34,
+                        ),
+                      ),
+                    ),
+                ],
+              ),
             );
           },
         ),

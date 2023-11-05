@@ -1,11 +1,11 @@
 import 'package:network/client/client.dart';
 import 'package:network/models/response/images_response.dart';
 
-import '../../feature_images_overview/repository/fetch_images_repository.dart';
+import 'fetch_images_repository.dart';
 
 class FetchImagesRepositoryImpl extends FetchImagesRepository {
   FetchImagesRepositoryImpl(
-     this._client,
+    this._client,
   );
 
   final NetworkClient _client;

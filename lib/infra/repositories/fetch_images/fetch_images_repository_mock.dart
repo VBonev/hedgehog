@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:network/models/response/images_response.dart';
 
-import '../../assets.dart';
-import '../../feature_images_overview/repository/fetch_images_repository.dart';
+import '../../../assets.dart';
+import 'fetch_images_repository.dart';
 
 class FetchImagesRepositoryMock extends FetchImagesRepository {
   @override
@@ -18,7 +18,7 @@ class FetchImagesRepositoryMock extends FetchImagesRepository {
   }
 
   Future<ImagesResponse> _getMockData() async {
-    final String response = await rootBundle.loadString(imagesJson);
+    final response = await rootBundle.loadString(imagesJson);
     final data = await json.decode(response);
     return ImagesResponse.fromJson(data);
   }

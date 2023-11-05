@@ -1,7 +1,7 @@
 import 'package:easy_search_bar/easy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:imgur/feature_images_overview/model/image_model.dart';
+import 'package:imgur/common_models/image_model.dart';
 import 'package:imgur/feature_images_overview/ui/images_grid_view.dart';
 
 import '../../assets.dart';
@@ -23,7 +23,7 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
   @override
   void initState() {
     super.initState();
-    _refresh();
+    _fetchImages();
   }
 
   @override
@@ -37,7 +37,7 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
             if (state is FetchImagesStateLoaded) {
               return ImageGridView(
                 images: state.images,
-                refresh: _refresh,
+                refresh: _fetchImages,
                 addFavorites: (List<ImageModel> images) =>
                     FetchImagesCubit.of(context).addFavorites(images: images),
               );
@@ -104,5 +104,5 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
     );
   }
 
-  void _refresh() => FetchImagesCubit.of(context).getPopularImages();
+  void _fetchImages() => FetchImagesCubit.of(context).getPopularImages();
 }

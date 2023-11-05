@@ -3,9 +3,9 @@ import 'package:imgur/infra/use_cases/add_favorites_use_case.dart';
 import 'package:network/client/client.dart';
 
 import '../../feature_images_overview/bloc/fetch_images_cubit.dart';
-import '../../feature_images_overview/repository/fetch_images_repository.dart';
-import '../repositories/fetch_images_repository_impl.dart';
-import '../repositories/fetch_images_repository_mock.dart';
+import '../repositories/fetch_images/fetch_images_repository.dart';
+import '../repositories/fetch_images/fetch_images_repository_impl.dart';
+import '../repositories/fetch_images/fetch_images_repository_mock.dart';
 import '../storage/shared_preferences_manager.dart';
 import '../use_cases/get_images_use_case.dart';
 import '../use_cases/search_image_use_case.dart';

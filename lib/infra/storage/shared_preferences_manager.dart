@@ -5,7 +5,6 @@ import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesManager {
-
   late final SharedPreferences prefs;
 
   Future<void> init() async {
@@ -16,9 +15,12 @@ class SharedPreferencesManager {
     required String? id,
     required bool isFavorite,
   }) {
+    // get stored favorites map
     final storedFavorites = prefs.getString(
       RiderSharedPreferencesKeys.favorites,
     );
+
+    // if nothing is stored create new map otherwise edit the stored one
     Map<String?, dynamic> newList = {};
     if (storedFavorites == null) {
       newList = {id: isFavorite};
@@ -26,6 +28,8 @@ class SharedPreferencesManager {
       newList = jsonDecode(storedFavorites);
       newList[id] = isFavorite;
     }
+
+    // save updated favorites
     prefs.setString(
       RiderSharedPreferencesKeys.favorites,
       jsonEncode(newList),

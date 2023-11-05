@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:imgur/feature_images_overview/model/image_model.dart';
+import 'package:imgur/common_models/image_model.dart';
 import 'package:network/models/base/server_errors.dart';
 import '../../infra/use_cases/add_favorites_use_case.dart';
 import '../../infra/use_cases/get_images_use_case.dart';
@@ -13,25 +13,18 @@ class FetchImagesCubit extends Cubit<FetchImagesState> {
     required this.getImageUseCase,
     required this.searchImageUseCase,
     required this.addFavoritesUseCase,
-  }) : super(const FetchImagesStateInitial());
+  }) : super(const FetchImagesStateLoading());
 
   final GetImagesUseCase getImageUseCase;
   final SearchImageUseCase searchImageUseCase;
   final AddFavoritesUseCase addFavoritesUseCase;
 
-  void getPopularImages() {
-    _loadData(getImageUseCase());
-  }
+  void getPopularImages() => _loadData(getImageUseCase());
 
-  void searchImage({
-    required String query,
-  }) {
-    _loadData(searchImageUseCase(query));
-  }
+  void searchImage({required String query}) =>
+      _loadData(searchImageUseCase(query));
 
-  void addFavorites({
-    required List<ImageModel> images,
-  }) =>
+  void addFavorites({required List<ImageModel> images}) =>
       emit(FetchImagesStateLoaded(addFavoritesUseCase(images)));
 
   Future<void> _loadData(Future loadData) async {

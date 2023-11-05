@@ -5,7 +5,7 @@ import '../../colors.dart';
 class FavoriteButton extends StatelessWidget {
   const FavoriteButton({
     required this.isSelected,
-    this.size=40,
+    this.size = 40,
     this.onTap,
     super.key,
   });

@@ -18,7 +18,8 @@ class AlbumDTO {
     this.score,
   });
 
-  factory AlbumDTO.fromJson(Map<String, dynamic> json) => _$AlbumDTOFromJson(json);
+  factory AlbumDTO.fromJson(Map<String, dynamic> json) =>
+      _$AlbumDTOFromJson(json);
 
   final String id;
   final String? title;

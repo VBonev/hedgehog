@@ -17,7 +17,8 @@ class ImageDTO {
     this.score,
   });
 
-  factory ImageDTO.fromJson(Map<String, dynamic> json) => _$ImageDTOFromJson(json);
+  factory ImageDTO.fromJson(Map<String, dynamic> json) =>
+      _$ImageDTOFromJson(json);
 
   final String id;
   final String? title;

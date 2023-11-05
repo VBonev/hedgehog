@@ -1,12 +1,7 @@
-
 part of 'fetch_images_cubit.dart';
 
 abstract class FetchImagesState {
   const FetchImagesState();
-}
-
-class FetchImagesStateInitial extends FetchImagesState {
-  const FetchImagesStateInitial();
 }
 
 class FetchImagesStateLoading extends FetchImagesState {

@@ -19,7 +19,7 @@ class ImgurApp extends StatelessWidget {
       title: appTitle,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor:  AppColors.primary,
+          seedColor: AppColors.primary,
           background: AppColors.background,
         ),
         useMaterial3: true,
