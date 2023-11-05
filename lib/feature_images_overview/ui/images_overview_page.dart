@@ -45,7 +45,13 @@ class _ImagesOverviewPageState extends State<ImagesOverviewPage> {
                   ),
                 ),
                 error: (error) => Center(
-                  child: Text(error.errorMessage ?? ''),
+                  child: Text(
+                    error.errorMessage ?? '',
+                    style: const TextStyle(
+                      color: AppColors.white,
+                      fontSize: 30,
+                    ),
+                  ),
                 ),
               ) ??
               const CenterLoadingView(),
