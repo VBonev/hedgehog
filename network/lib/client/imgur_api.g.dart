@@ -70,7 +70,7 @@ class _ImgurApi implements ImgurApi {
     )
             .compose(
               _dio.options,
-              '/3/gallery/${section.name}/${sort.name}/${window.name}/${page}/search',
+              '/3/gallery/search/${section.name}/${sort.name}/${window.name}/${page}',
               queryParameters: queryParameters,
               data: _data,
             )

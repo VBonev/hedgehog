@@ -11,7 +11,7 @@ part 'imgur_api.g.dart';
 abstract class ImgurApi {
   factory ImgurApi(Dio dio, {String baseUrl}) = _ImgurApi;
 
-  @GET('$galleryPath')
+  @GET('$galleryPath$pathParams')
   Future<ImagesResponse> getPopularImages({
     @Path(sectionParam) required Section section,
     @Path(sortParam) required Sort sort,
@@ -19,7 +19,7 @@ abstract class ImgurApi {
     @Path(pageParam) required int page,
   });
 
-  @GET('$searchPath')
+  @GET('$searchPath$pathParams')
   Future<ImagesResponse> searchImage({
     @Path(sectionParam) required Section section,
     @Path(sortParam) required Sort sort,

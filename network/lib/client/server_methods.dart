@@ -13,11 +13,12 @@
 // ?q=cats
 
 //methods
-const String galleryPath =
-    '/3/gallery/{$sectionParam}/{$sortParam}/{$windowParam}/{$pageParam}';
+const String galleryPath = '/3/gallery';
 const String searchPath = '$galleryPath/search';
 
 //path params
+const String pathParams =
+    '/{$sectionParam}/{$sortParam}/{$windowParam}/{$pageParam}';
 const String sectionParam = 'section';
 const String sortParam = 'sort';
 const String windowParam = 'window';
