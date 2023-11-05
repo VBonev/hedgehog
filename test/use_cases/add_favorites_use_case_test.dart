@@ -54,7 +54,11 @@ void main() {
         'Set all images to be favorite from the saved values',
         () async {
           when(sharedPrefs.getFavorites()).thenAnswer(
-                (result) => {},
+            (result) => {
+              'LQOfCny': true,
+              'L23fCny': true,
+              'LQ43ny': true,
+            },
           );
           expect(
             fetchImages(images),
