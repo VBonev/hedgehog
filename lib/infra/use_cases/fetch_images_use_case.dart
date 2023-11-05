@@ -3,8 +3,8 @@ import '../repositories/fetch_images/fetch_images_repository.dart';
 import '../mapper/image_mapper.dart';
 import 'add_favorites_use_case.dart';
 
-class GetImagesUseCase {
-  const GetImagesUseCase(
+class FetchImagesUseCase {
+  const FetchImagesUseCase(
     this._repository,
     this._addFavoritesUseCase,
   );

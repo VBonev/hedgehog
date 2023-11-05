@@ -7,7 +7,7 @@ import '../repositories/fetch_images/fetch_images_repository.dart';
 import '../repositories/fetch_images/fetch_images_repository_impl.dart';
 import '../repositories/fetch_images/fetch_images_repository_mock.dart';
 import '../storage/shared_preferences_manager.dart';
-import '../use_cases/get_images_use_case.dart';
+import '../use_cases/fetch_images_use_case.dart';
 import '../use_cases/search_image_use_case.dart';
 
 final getIt = GetIt.instance;
@@ -27,7 +27,7 @@ void setupDI({String? baseUrl}) {
   getIt.registerLazySingleton<AddFavoritesUseCase>(() => AddFavoritesUseCase(
         getIt.get(),
       ));
-  getIt.registerLazySingleton<GetImagesUseCase>(() => GetImagesUseCase(
+  getIt.registerLazySingleton<FetchImagesUseCase>(() => FetchImagesUseCase(
         getIt.get(),
         getIt.get(),
       ));

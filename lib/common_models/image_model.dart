@@ -11,6 +11,22 @@ class ImageModel {
     this.score,
   });
 
+  @override
+  bool operator ==(Object other) =>
+      other is ImageModel &&
+      other.id == id &&
+      other.link == link &&
+      other.title == title &&
+      other.views == views &&
+      other.isFavorite == isFavorite &&
+      other.ups == ups &&
+      other.downs == downs &&
+      other.points == points &&
+      other.score == score;
+
+  @override
+  int get hashCode => id.hashCode;
+
   final String? id;
   final String? link;
   final String? title;

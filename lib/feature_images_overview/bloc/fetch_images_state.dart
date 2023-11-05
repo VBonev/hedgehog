@@ -1,21 +1,20 @@
-part of 'fetch_images_cubit.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:network/models/base/server_errors.dart';
 
-abstract class FetchImagesState {
-  const FetchImagesState();
-}
+import '../../common_models/image_model.dart';
 
-class FetchImagesStateLoading extends FetchImagesState {
-  const FetchImagesStateLoading();
-}
+part 'fetch_images_state.freezed.dart';
 
-class FetchImagesStateLoaded extends FetchImagesState {
-  const FetchImagesStateLoaded(this.images);
+@freezed
+class FetchImagesState with _$FetchImagesState {
+  const factory FetchImagesState.initial() = FetchImagesStateInitial;
 
-  final List<ImageModel> images;
-}
+  const factory FetchImagesState.loading() = FetchImagesStateLoading;
 
-class FetchImagesStateError extends FetchImagesState {
-  const FetchImagesStateError({required this.error});
+  const factory FetchImagesState.loaded(
+    List<ImageModel> images,
+  ) = FetchImagesStateLoaded;
 
-  final ServerError error;
+  const factory FetchImagesState.error({required ServerError error}) =
+      FetchImagesStateError;
 }
