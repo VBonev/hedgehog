@@ -1,6 +1,6 @@
 import 'package:imgur/common_models/image_model.dart';
-import 'package:imgur/feature_images_overview/bloc/fetch_images_cubit.dart';
-import 'package:imgur/feature_images_overview/bloc/fetch_images_state.dart';
+import 'package:imgur/feature_images_overview/cubit/fetch_images_cubit.dart';
+import 'package:imgur/feature_images_overview/cubit/fetch_images_state.dart';
 import 'package:imgur/infra/use_cases/add_favorites_use_case.dart';
 import 'package:imgur/infra/use_cases/fetch_images_use_case.dart';
 import 'package:imgur/infra/use_cases/search_image_use_case.dart';

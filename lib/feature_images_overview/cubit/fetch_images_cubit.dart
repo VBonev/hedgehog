@@ -24,17 +24,17 @@ class FetchImagesCubit extends Cubit<FetchImagesState> {
       _loadData(searchImageUseCase(query));
 
   void addFavorites({required List<ImageModel> images}) {
-    emit(const FetchImagesStateLoaded([]));
-    emit(FetchImagesStateLoaded(addFavoritesUseCase(images)));
+    emit(const FetchImagesState.loaded([]));
+    emit(FetchImagesState.loaded(addFavoritesUseCase(images)));
   }
 
   Future<void> _loadData(Future loadData) async {
     try {
-      emit(const FetchImagesStateLoading());
+      emit(const FetchImagesState.loading());
       final data = await loadData;
-      emit(FetchImagesStateLoaded(data));
+      emit(FetchImagesState.loaded(data));
     } catch (error) {
-      emit(FetchImagesStateError(error: ServerError.withError(error)));
+      emit(FetchImagesState.error(error: ServerError.withError(error)));
     }
   }
 

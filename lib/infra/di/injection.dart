@@ -1,8 +1,9 @@
 import 'package:get_it/get_it.dart';
+import 'package:imgur/feature_image_details/cubit/image_details_cubit.dart';
 import 'package:imgur/infra/use_cases/add_favorites_use_case.dart';
 import 'package:network/client/client.dart';
 
-import '../../feature_images_overview/bloc/fetch_images_cubit.dart';
+import '../../feature_images_overview/cubit/fetch_images_cubit.dart';
 import '../repositories/fetch_images/fetch_images_repository.dart';
 import '../repositories/fetch_images/fetch_images_repository_impl.dart';
 import '../repositories/fetch_images/fetch_images_repository_mock.dart';
@@ -20,6 +21,10 @@ void setupDI({String? baseUrl}) {
   }
   getIt.registerLazySingleton<SharedPreferencesManager>(
       () => SharedPreferencesManager()..init());
+
+  getIt.registerFactory<ImageDetailsCubit>(() => ImageDetailsCubit(
+        getIt.get(),
+      ));
 
   getIt.registerLazySingleton<FetchImagesRepository>(() => isMock
       ? FetchImagesRepositoryMock()

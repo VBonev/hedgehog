@@ -11,7 +11,7 @@ class SharedPreferencesManager {
     prefs = await SharedPreferences.getInstance();
   }
 
-  void changeFavorites({
+  void setFavoriteById({
     required String? id,
     required bool isFavorite,
   }) {
@@ -44,6 +44,17 @@ class SharedPreferencesManager {
       return jsonDecode(storedFavorites);
     }
     return {};
+  }
+
+  bool getFavoriteById(String? id) {
+    final storedFavorites = prefs.getString(
+      RiderSharedPreferencesKeys.favorites,
+    );
+    if (storedFavorites != null) {
+      Map<String?, dynamic> favorites = jsonDecode(storedFavorites);
+      return favorites[id] == true;
+    }
+    return false;
   }
 
   static SharedPreferencesManager of(BuildContext context) =>

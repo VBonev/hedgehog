@@ -124,13 +124,13 @@ class MockSharedPreferencesManager extends _i1.Mock
       ) as _i5.Future<void>);
 
   @override
-  void changeFavorites({
+  void setFavoriteById({
     required String? id,
     required bool? isFavorite,
   }) =>
       super.noSuchMethod(
         Invocation.method(
-          #changeFavorites,
+          #setFavoriteById,
           [],
           {
             #id: id,
@@ -148,4 +148,13 @@ class MockSharedPreferencesManager extends _i1.Mock
         ),
         returnValue: <String?, dynamic>{},
       ) as Map<String?, dynamic>);
+
+  @override
+  bool getFavoriteById(String? id) => (super.noSuchMethod(
+        Invocation.method(
+          #getFavoriteById,
+          [id],
+        ),
+        returnValue: false,
+      ) as bool);
 }
