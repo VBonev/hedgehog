@@ -9,37 +9,37 @@ abstract class ImageMapper {
 
   static List<ImageModel> map(
     ImagesResponse response,
-  ) =>
-      response.data?.map(
-            (element) {
-              var image = element.images?.firstWhereOrNull(
-                (element) => element.type?.contains(_imageType) == true,
-              );
-              return _mapSingleImage(
-                album: element,
-                model: image,
-              );
-            },
-          ).toList() ??
-          []
-        ..removeWhere(
-          (element) => element.link == null,
-        );
+  ) {
+    List<ImageModel> images = [];
+    response.data?.forEach((album) {
+      final tempImages = album.images;
+      tempImages?.removeWhere((element) =>
+          element.link == null || element.type?.contains(_imageType) == false);
+      images.addAll(tempImages
+              ?.map((image) => _mapSingleImage(
+                    album: album,
+                    image: image,
+                  ))
+              .toList() ??
+          []);
+    });
+    return images;
+  }
 
   static ImageModel _mapSingleImage({
     AlbumDTO? album,
-    ImageDTO? model,
+    ImageDTO? image,
   }) =>
       ImageModel(
-        id: model?.id,
-        link: model?.link,
-        title: model?.title ?? album?.title,
-        views: model?.views ?? album?.views,
-        isFavorite: model?.favorite,
-        ups: model?.ups ?? album?.ups,
-        downs: model?.downs ?? album?.downs,
-        points: model?.points ?? album?.points,
-        score: model?.score ?? album?.score,
+        id: image?.id,
+        link: image?.link,
+        title: image?.title ?? album?.title,
+        views: image?.views ?? album?.views,
+        isFavorite: image?.favorite,
+        ups: image?.ups ?? album?.ups,
+        downs: image?.downs ?? album?.downs,
+        points: image?.points ?? album?.points,
+        score: image?.score ?? album?.score,
       );
 
   static List<ImageModel> addFavorites(
